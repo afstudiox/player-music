@@ -4,7 +4,8 @@ class Loading extends Component {
   render() {
     return (
       <div className="container-loading">
-        <h1>Carregando...</h1>
+        <h1>LOADING PAGE</h1>
+        <h2>Carregando...</h2>
       </div>
     );
   }
