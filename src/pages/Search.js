@@ -18,25 +18,13 @@ class Search extends Component {
     };
   }
 
-  // funcao que habilita o botão condicionalmente
-  enableButton = () => {
-    const { inputArtist } = this.state;
-    let validate = false;
-    const min = 2;
-    if (inputArtist.length < min) {
-      validate = true;
-    } else {
-      validate = false;
-    }
-    return this.setState({ buttonState: validate });
-  }
-
   // função assincrona para chamar a API
   request = async () => {
     const { inputArtist } = this.state;
     this.setState({
       loading: true,
     });
+
     const result = await searchAlbumsAPI(inputArtist);
     this.setState({
       loading: false,
@@ -54,6 +42,19 @@ class Search extends Component {
       inputArtist: '',
     });
   }
+
+    // funcao que habilita o botão condicionalmente
+    enableButton = () => {
+      const { inputArtist } = this.state;
+      let validate = false;
+      const min = 2;
+      if (inputArtist.length < min) {
+        validate = true;
+      } else {
+        validate = false;
+      }
+      return this.setState({ buttonState: validate });
+    }
 
   renderCondiction = () => {
     const { buttonState, firstLoad, resultArtist, nameArtist } = this.state;

@@ -23,10 +23,10 @@ class Albuns extends Component {
 
 Albuns.propTypes = {
   result: PropTypes.shape({
-    artworkUrl100: PropTypes.string.isRequired,
-    collectionName: PropTypes.string.isRequired,
-    artistName: PropTypes.string.isRequired,
-    collectionId: PropTypes.string.isRequired,
+    artworkUrl100: PropTypes.string,
+    collectionName: PropTypes.string,
+    artistName: PropTypes.string,
+    collectionId: PropTypes.string,
   }).isRequired,
 };
 
