@@ -47,7 +47,7 @@ class Search extends Component {
     enableButton = () => {
       const { inputArtist } = this.state;
       let validate = false;
-      const min = 2;
+      const min = 1;
       if (inputArtist.length < min) {
         validate = true;
       } else {
