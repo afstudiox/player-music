@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Loading from '../pages/Loading';
+import '../css/header.css';
 
 class Header extends Component {
   constructor() {
@@ -23,18 +24,45 @@ class Header extends Component {
   render() {
     const { name, hasUser } = this.state;
     return (
-      <header data-testid="header-component">
-        <h1>HEADER COMPONENT</h1>
-        <nav>
-          <Link to="/search" data-testid="link-to-search">Search</Link>
-          <Link to="/favorites" data-testid="link-to-favorites">Favorites</Link>
-          <Link to="/profile" data-testid="link-to-profile">Profile</Link>
+      <header
+        data-testid="header-component"
+        className="header-container"
+      >
+        <div className="header-container-superior">
+          <div className="logo" />
+          {
+            hasUser
+              ? (
+                <div className="user-container">
+                  <div className="user" />
+                  <p data-testid="header-user-name">{ name }</p>
+                </div>)
+              : <Loading />
+          }
+        </div>
+        <nav className="nav-container">
+          <Link
+            className="link-nav"
+            to="/search"
+            data-testid="link-to-search"
+          >
+            Search
+          </Link>
+          <Link
+            className="link-nav"
+            to="/favorites"
+            data-testid="link-to-favorites"
+          >
+            Favorites
+          </Link>
+          <Link
+            className="link-nav"
+            to="/profile"
+            data-testid="link-to-profile"
+          >
+            Profile
+          </Link>
         </nav>
-        {
-          hasUser
-            ? <h2 data-testid="header-user-name">{ name }</h2>
-            : <Loading />
-        }
       </header>
     );
   }
