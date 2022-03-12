@@ -58,47 +58,43 @@ class Search extends Component {
 
   renderCondiction = () => {
     const { buttonState, firstLoad, resultArtist, nameArtist } = this.state;
-    if (firstLoad) {
-      return (
-        (
-          <div className="search-form">
-            <h1>SEARCH FORM</h1>
-            <form>
-              <label htmlFor="input-search">
-                <input
-                  type="text"
-                  name="inputArtist"
-                  data-testid="search-artist-input"
-                  placeholder="Nome do Artista"
-                  onChange={ this.handleChange }
-                />
-              </label>
-              <button
-                type="button"
-                name="btn-submit"
-                data-testid="search-artist-button"
-                disabled={ buttonState }
-                onClick={ this.request }
-              >
-                Procurar
-              </button>
-            </form>
-          </div>
-        )
-      );
-    }
     return (
-      resultArtist.length !== 0
+      resultArtist.length !== 0 || firstLoad
         ? (
-          <div className="albuns-container">
-            <h2>
-              Resultado de álbuns de:
-              {' '}
-              { nameArtist }
-            </h2>
-            {resultArtist
-              .map((item) => (<Albuns key={ item.collectionId } result={ item } />))}
-          </div>
+          <>
+            <div className="search-form">
+              <h1>SEARCH FORM</h1>
+              <form>
+                <label htmlFor="input-search">
+                  <input
+                    type="text"
+                    name="inputArtist"
+                    data-testid="search-artist-input"
+                    placeholder="Nome do Artista"
+                    onChange={ this.handleChange }
+                  />
+                </label>
+                <button
+                  type="button"
+                  name="btn-submit"
+                  data-testid="search-artist-button"
+                  disabled={ buttonState }
+                  onClick={ this.request }
+                >
+                  Procurar
+                </button>
+              </form>
+            </div>
+            <div className="albuns-container">
+              <p>
+                Resultado de álbuns de:
+                {' '}
+                {nameArtist}
+              </p>
+              {resultArtist
+                .map((item) => (<Albuns key={ item.collectionId } result={ item } />))}
+            </div>
+          </>
         )
         : (
           <div className="albuns-container">

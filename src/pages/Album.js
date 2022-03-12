@@ -23,7 +23,6 @@ class Album extends Component {
   request = async () => {
     const { match: { params: { id } } } = this.props;
     const musicsForAlbum = await getMusics(id);
-    console.log(musicsForAlbum);
     const { artistName, collectionName } = musicsForAlbum[0];
     this.setState({
       artistName,
@@ -44,8 +43,10 @@ class Album extends Component {
           {tracks
             .map((track) => (<MusicCard
               key={ track.trackId }
+              trackId={ track.trackId }
               trackName={ track.trackName }
               previewUrl={ track.previewUrl }
+              tracks={ tracks }
             />))}
         </div>
       </div>
