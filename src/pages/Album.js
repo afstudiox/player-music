@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
 import MusicCard from '../components/MusicCard';
+import * as favorites from '../services/favoriteSongsAPI';
+import Loading from './Loading';
 
 class Album extends Component {
   constructor() {
@@ -11,11 +13,14 @@ class Album extends Component {
       artistName: '',
       collectionName: '',
       tracks: [],
+      loading: false,
+      listFavorites: [],
     };
   }
 
   componentDidMount() {
     this.request();
+    this.favoritesRemenber();
   }
 
   // função assincrona para chamar a API
@@ -32,24 +37,40 @@ class Album extends Component {
     });
   }
 
+  favoritesRemenber = async () => {
+    this.setState({
+      loading: true,
+    });
+    favorites.getFavoriteSongs();
+    this.setState({
+      loading: false,
+    });
+  }
+
   render() {
+    const { loading } = this.state;
     const { artistName, collectionName, tracks } = this.state;
     return (
-      <div data-testid="page-album">
-        <Header />
-        <div className="album-container">
-          <p data-testid="artist-name">{artistName}</p>
-          <p data-testid="album-name">{collectionName}</p>
-          {tracks
-            .map((track) => (<MusicCard
-              key={ track.trackId }
-              trackId={ track.trackId }
-              trackName={ track.trackName }
-              previewUrl={ track.previewUrl }
-              tracks={ tracks }
-            />))}
-        </div>
-      </div>
+
+      !loading
+        ? (
+          <div data-testid="page-album">
+            <Header />
+            <div className="album-container">
+              <p data-testid="artist-name">{artistName}</p>
+              <p data-testid="album-name">{collectionName}</p>
+              {tracks
+                .map((track) => (<MusicCard
+                  key={ track.trackId }
+                  trackId={ track.trackId }
+                  trackName={ track.trackName }
+                  previewUrl={ track.previewUrl }
+                  tracks={ tracks }
+                />))}
+            </div>
+          </div>
+        )
+        : <Loading />
     );
   }
 }
