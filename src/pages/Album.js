@@ -14,7 +14,6 @@ class Album extends Component {
       collectionName: '',
       tracks: [],
       loading: false,
-      listFavorites: [],
     };
   }
 
