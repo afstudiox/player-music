@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
+import '../css/login.css';
 
 class Login extends Component {
   constructor() {
@@ -50,28 +51,30 @@ class Login extends Component {
     const { buttonState } = this.state;
 
     return (
-      <div data-testid="page-login">
-        <h1>FORM PAGE</h1>
-        <form>
-          <label htmlFor="input-nome">
-            <input
-              type="text"
-              name="inputName"
-              data-testid="login-name-input"
-              placeholder="Nome"
-              onChange={ this.handleChange }
-            />
-          </label>
-          <button
-            type="button"
-            name="btn-submit"
-            data-testid="login-submit-button"
-            disabled={ buttonState }
-            onClick={ this.authentication }
-          >
-            Entrar
-          </button>
-        </form>
+      <div data-testid="page-login" className="login-container row">
+        <div className="login-card col">
+          <h2>Seja bem vindo ao seu player favorito</h2>
+          <form className="col">
+            <label htmlFor="input-nome">
+              <input
+                type="text"
+                name="inputName"
+                data-testid="login-name-input"
+                placeholder="Digite seu nome"
+                onChange={ this.handleChange }
+              />
+            </label>
+            <button
+              type="button"
+              name="btn-submit"
+              data-testid="login-submit-button"
+              disabled={ buttonState }
+              onClick={ this.authentication }
+            >
+              Entrar
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

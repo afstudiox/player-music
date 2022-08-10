@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-decoration: none;
 }
 
 body {
@@ -13,20 +14,36 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  /* Color Theme Swatches in Hex */
+--color-gray: #BFCDD9;
+--color-yellow-1: #EDF25C;
+--color-yellow-2:  #BBBF49;
+--color-yellow-3: #575922;
+--color-dark-1: #231F20;
+--color-dark-2: #0D0D0D;
+
+/* Color Theme Swatches in RGBA */
+--color-rgba-gray: rgba(190, 204, 216, 1);
+--color-rgba-yellow-1: rgba(237, 242, 92, 1);
+--color-rgba-yellow-2:  rgba(187, 191, 72, 1);
+--color-rgba-yellow-3: rgba(87, 89, 33, 1);
+--color-rgba-black-3: rgba(12, 12, 12, 1);
+
+/* Color Theme Swatches in HSLA */
+--color-hsla-gray: hsla(208, 25, 79, 1);
+--color-hsla-yellow-1:  hsla(61, 85, 65, 1);;
+--color-hsla-yellow-2:  hsla(61, 48, 51, 1); ;
+--color-hsla-yellow-3: hsla(61, 44, 24, 1);;
+--color-hsla-black-3: hsla(0, 0, 5, 1); ;
 }
 
-.loading {
-  align-items: center;
+.row{
   display: flex;
-  justify-content: center;
-  height: 100vh;
-  color: #023031;
-  font-size: 60px;
-  font-weight: 300;
-  font-family: Fira Sans;
-  line-height: 65px;
-  letter-spacing: 0.02em;
+  flex-direction: row;
+}
+
+.col{
+  display: flex;
+  flex-direction: column;
 }

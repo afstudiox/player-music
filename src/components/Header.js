@@ -26,9 +26,9 @@ class Header extends Component {
     return (
       <header
         data-testid="header-component"
-        className="header-container"
+        className="col"
       >
-        <div className="header-container-superior">
+        <div className="header-container-superior row">
           <div className="logo" />
           {
             hasUser
@@ -46,21 +46,21 @@ class Header extends Component {
             to="/search"
             data-testid="link-to-search"
           >
-            Search
+            SEARCH
           </Link>
           <Link
             className="link-nav"
             to="/favorites"
             data-testid="link-to-favorites"
           >
-            Favorites
+            FAVORITES
           </Link>
           <Link
             className="link-nav"
             to="/profile"
             data-testid="link-to-profile"
           >
-            Profile
+            PROFILE
           </Link>
         </nav>
       </header>
