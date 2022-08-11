@@ -31,6 +31,7 @@
   display: flex;
   height: 45px;
   justify-content: space-between;
+  margin-right: 40px;
 }
 
 .user-container p {

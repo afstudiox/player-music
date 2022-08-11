@@ -52,6 +52,7 @@ class Login extends Component {
 
     return (
       <div data-testid="page-login" className="login-container row">
+        <div className="login-logo" />
         <div className="login-card col">
           <h2>Seja bem vindo ao seu player favorito</h2>
           <form className="col">

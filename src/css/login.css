@@ -6,9 +6,19 @@
   width: 100vw;
 }
 
+.login-logo {
+  background-image: url('../assets/logo_invertido.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 200px;
+  height: 300px;
+  width: 300px;
+}
+
 .login-card {
   align-items: center;
   background-color: var(--color-yellow-2);
+  border: solid 4px var(--color-dark-1);
   border-radius: 12px;
   height: 300px;
   width: 300px;
@@ -30,7 +40,7 @@
 }
 
 .login-card form input {
-  border: none;
+  border: solid 2px var(--color-dark-1);
   border-radius: 4px;
   height: 40px;
   padding: 8px;
@@ -53,7 +63,7 @@
 }
 
 .login-card form button:not( [ disabled ] ) {
-  border: solid 1px var(--color-dark-1);
+  border: solid 2px var(--color-dark-1);
 }
 
 .login-card form button:not( [ disabled ] ):hover {
