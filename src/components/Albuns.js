@@ -11,10 +11,10 @@ class Albuns extends Component {
         to={ `/album/${collectionId}` }
         search={ collectionId }
       >
-        <div className="album-item" data-testid={ `link-to-album-${collectionId}` }>
-          <img src={ artworkUrl100 } alt="" />
-          <p>{ collectionName }</p>
-          <p>{ artistName }</p>
+        <div className="album-item col" data-testid={ `link-to-album-${collectionId}` }>
+          <img className="album-image" src={ artworkUrl100 } alt="" />
+          <p className="album-artist">{ artistName }</p>
+          <p className="album-name">{ collectionName }</p>
         </div>
       </Link>
     );

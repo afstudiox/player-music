@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
 import Loading from './Loading';
 import '../css/header.css';
+import '../css/search.css';
 
 class Search extends Component {
   constructor() {
@@ -61,10 +62,10 @@ class Search extends Component {
     return (
       resultArtist.length !== 0 || firstLoad
         ? (
-          <>
-            <div className="search-form">
-              <h1>SEARCH FORM</h1>
-              <form>
+          <div className="search-container col">
+            <div className="search-form-container col">
+              <h2>Encontre sua banda ou artista</h2>
+              <form className="row">
                 <label htmlFor="input-search">
                   <input
                     type="text"
@@ -85,19 +86,21 @@ class Search extends Component {
                 </button>
               </form>
             </div>
-            <div className="albuns-container">
+            <div className="albuns-container col">
               <p>
-                Resultado de álbuns de:
+                Resultado para :
                 {' '}
-                {nameArtist}
+                <span>{nameArtist}</span>
               </p>
-              {resultArtist
-                .map((item) => (<Albuns key={ item.collectionId } result={ item } />))}
+              <div className="albuns-line row">
+                {resultArtist
+                  .map((item) => (<Albuns key={ item.collectionId } result={ item } />))}
+              </div>
             </div>
-          </>
+          </div>
         )
         : (
-          <div className="albuns-container">
+          <div className="albuns-container row">
             <p>
               Nenhum álbum foi encontrado
             </p>
