@@ -76,7 +76,7 @@ class Search extends Component {
                   />
                 </label>
                 <button
-                  type="button"
+                  type="submit"
                   name="btn-submit"
                   data-testid="search-artist-button"
                   disabled={ buttonState }

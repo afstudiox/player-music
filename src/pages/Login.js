@@ -66,7 +66,7 @@ class Login extends Component {
               />
             </label>
             <button
-              type="button"
+              type="submit"
               name="btn-submit"
               data-testid="login-submit-button"
               disabled={ buttonState }

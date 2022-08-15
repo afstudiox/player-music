@@ -4,8 +4,7 @@
 
 .search-form-container {
   background-color: var(--color-gray);
-  border-bottom: solid 4px var(--color-dark-1);
-  box-shadow: 0 4px 8px 0 var(--color-dark-1);
+  border-bottom: solid 4px var(--color-yellow-3);
   justify-content: space-between;
   padding-bottom: 10px;
   width: 100%;
@@ -48,7 +47,8 @@
 
 .albuns-container {
   align-items: center;
-  margin: 0 30px;
+  background-color: var(--color-gray-2);
+  padding: 0 30px;
 }
 
 .albuns-container > p:not( :empty ) {

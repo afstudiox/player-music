@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Loading from '../pages/Loading';
 import * as favorites from '../services/favoriteSongsAPI';
+import '../css/music-card.css';
 
 class MusicCard extends Component {
   constructor() {
@@ -13,12 +14,12 @@ class MusicCard extends Component {
   }
 
   handleFavorite = async ({ target }) => {
-    const { tracks } = this.props;
+    const { trackName, previewUrl, trackId } = this.props;
     this.setState({
       loading: true,
       favorite: target.checked,
     });
-    await favorites.addSong(tracks);
+    await favorites.addSong({ trackName, previewUrl, trackId });
     this.setState({
       loading: false,
     });
@@ -30,17 +31,17 @@ class MusicCard extends Component {
     return (
       !loading
         ? (
-          <div className="track-container">
-            <audio data-testid="audio-component" src={ previewUrl } controls>
-              <track kind="captions" />
-              O seu navegador não suporta o elemento
-              {' '}
-              <code>audio</code>
-              .
-            </audio>
-            { trackName }
+          <div className="track-line-container row">
+            <div className="player-container">
+              <audio data-testid="audio-component" src={ previewUrl } controls>
+                <track kind="captions" />
+                O seu navegador não suporta o elemento
+                {' '}
+                <code>audio</code>
+                .
+              </audio>
+            </div>
             <label htmlFor="favorite">
-              Favorita
               <input
                 data-testid={ `checkbox-music-${trackId}` }
                 id="favorite"
@@ -49,6 +50,7 @@ class MusicCard extends Component {
                 onClick={ this.handleFavorite }
               />
             </label>
+            <p>{ trackName }</p>
           </div>
         )
         : <Loading />

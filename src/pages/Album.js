@@ -13,6 +13,7 @@ class Album extends Component {
     this.state = {
       artistName: '',
       collectionName: '',
+      artworkUrl100: '',
       tracks: [],
       loading: false,
     };
@@ -28,10 +29,11 @@ class Album extends Component {
   request = async () => {
     const { match: { params: { id } } } = this.props;
     const musicsForAlbum = await getMusics(id);
-    const { artistName, collectionName } = musicsForAlbum[0];
+    const { artistName, collectionName, artworkUrl100 } = musicsForAlbum[0];
     this.setState({
       artistName,
       collectionName,
+      artworkUrl100,
       tracks: musicsForAlbum
         .filter((_track, index) => index !== 0),
     });
@@ -49,7 +51,7 @@ class Album extends Component {
 
   render() {
     const { loading } = this.state;
-    const { artistName, collectionName, tracks } = this.state;
+    const { artistName, collectionName, artworkUrl100, tracks } = this.state;
     return (
 
       !loading
@@ -57,16 +59,23 @@ class Album extends Component {
           <div data-testid="page-album">
             <Header />
             <div className="album-container">
-              <p data-testid="artist-name">{artistName}</p>
-              <p data-testid="album-name">{collectionName}</p>
-              {tracks
-                .map((track) => (<MusicCard
-                  key={ track.trackId }
-                  trackId={ track.trackId }
-                  trackName={ track.trackName }
-                  previewUrl={ track.previewUrl }
-                  tracks={ tracks }
-                />))}
+              <div className="album-container-header row">
+                <img src={ artworkUrl100 } alt="Foto do Album" />
+                <div className="album-container-header-text">
+                  <p data-testid="album-artist-name">{artistName}</p>
+                  <p data-testid="album-name">{collectionName}</p>
+                </div>
+              </div>
+              <div className="album-container-tracks col">
+                {tracks
+                  .map((track) => (<MusicCard
+                    key={ track.trackId }
+                    trackId={ track.trackId }
+                    trackName={ track.trackName }
+                    previewUrl={ track.previewUrl }
+                    tracks={ tracks }
+                  />))}
+              </div>
             </div>
           </div>
         )
