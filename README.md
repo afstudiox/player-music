@@ -2,7 +2,7 @@
 
 ## Sobre
 Aplicação que reproduz músicas das mais variadas bandas e artistas, cria uma lista de músicas favoritas e edita o perfil da pessoa usuária logada.<br>
-[Teste a aplicação aqui]()
+[Teste a aplicação aqui](https://afstudiox.github.io/player-music)
 
 _Observações_
   - As funcionalidades da aplicação foi organizada em rotas.

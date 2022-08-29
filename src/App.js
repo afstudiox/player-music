@@ -13,7 +13,7 @@ import Header from './components/Header';
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         {/* <p>TrybeTunes</p> */}
         <Switch>
           <Route exact path="/" render={ (props) => <Login { ...props } /> } />
