@@ -6,7 +6,7 @@ Aplicação que reproduz músicas das mais variadas bandas e artistas, cria uma 
 
 _Observações_
   - As funcionalidades da aplicação foi organizada em rotas.
-  - Esta aplicação consome e enviar dados para APIs para pesquisar a banda ou artista, recupera as músicas de cada álbum e salva as músicas favoritas, além de editar as informações da pessoa logada. 
+  - Esta aplicação consome e envia dados para APIs para pesquisar a banda ou artista, recupera as músicas de cada álbum e salva as músicas favoritas, além de editar as informações da pessoa logada. 
 
 
 _Requisitos_
