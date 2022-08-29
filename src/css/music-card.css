@@ -46,15 +46,16 @@
 
 .track-line-container {
   align-items: center;
-  margin-left: calc((100vw / 2) - 180px);
+  margin-left: calc((100vw / 2) - 150px);
   padding: 5px;
 }
 
+.player-container audio {
+  display: none;
+}
+
 .player-container {
-  background-color: var(--color-yellow-3);
-  border-radius: 32px;
-  height: 75px;
-  width: 180px;
+  padding: 10px;
 }
 
 .track-line-container audio {
@@ -66,4 +67,8 @@
 .track-line-container label {
   text-align: center;
   width: 30px;
+}
+
+.track-line-container span {
+  width: 15px;
 }

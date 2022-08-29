@@ -1,27 +1,34 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Header from '../components/Header';
 import getMusics from '../services/musicsAPI';
+import Header from '../components/Header';
 import MusicCard from '../components/MusicCard';
-import * as favorites from '../services/favoriteSongsAPI';
+import { getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 import '../css/album.css';
 
 class Album extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
       artistName: '',
       collectionName: '',
       artworkUrl100: '',
       tracks: [],
       loading: false,
+      favoriteList: undefined,
     };
   }
 
   componentDidMount() {
     this.request();
-    this.favoritesRemenber();
+    this.getFavoritesList();
+  }
+
+  getFavoritesList = async () => {
+    const data = await getFavoriteSongs();
+    this.setState({ favoriteList: data });
   }
 
   // função assincrona para chamar a API
@@ -39,19 +46,16 @@ class Album extends Component {
     });
   }
 
-  favoritesRemenber = async () => {
-    this.setState({
-      loading: true,
-    });
-    favorites.getFavoriteSongs();
-    this.setState({
-      loading: false,
-    });
-  }
-
   render() {
     const { loading } = this.state;
-    const { artistName, collectionName, artworkUrl100, tracks } = this.state;
+    const {
+      artistName,
+      collectionName,
+      artworkUrl100,
+      tracks,
+      favoriteList,
+    } = this.state;
+
     return (
 
       !loading
@@ -67,14 +71,23 @@ class Album extends Component {
                 </div>
               </div>
               <div className="album-container-tracks col">
-                {tracks
-                  .map((track) => (<MusicCard
-                    key={ track.trackId }
-                    trackId={ track.trackId }
-                    trackName={ track.trackName }
-                    previewUrl={ track.previewUrl }
-                    tracks={ tracks }
-                  />))}
+                {
+                  (tracks && favoriteList)
+                  && tracks
+                    .map((track, index) => {
+                      const isFavorite = favoriteList
+                        .some((favorite) => favorite.trackId === track.trackId);
+                      return (
+                        <MusicCard
+                          key={ index }
+                          trackId={ track.trackId }
+                          trackName={ track.trackName }
+                          previewUrl={ track.previewUrl }
+                          tracks={ tracks }
+                          isFavorite={ isFavorite }
+                        />);
+                    })
+                }
               </div>
             </div>
           </div>

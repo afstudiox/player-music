@@ -1,0 +1,22 @@
+.loading-container {
+  display: flex;
+  justify-content: center;
+  min-height: calc(100vh / 2);
+  transform: scale(3);
+}
+
+.loading {
+  animation: is-rotating 1s infinite;
+  border: 6px solid var(--color-gray);
+  border-radius: 50%;
+  border-top-color: var(--color-yellow-1);
+  height: 50px;
+  margin-top: 200px;
+  width: 50px;
+  z-index: 100;
+}
+
+@keyframes is-rotating {
+
+  to { transform: rotate(1turn); }
+}

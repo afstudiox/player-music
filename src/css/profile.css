@@ -1,0 +1,45 @@
+.profile-container {
+  align-items: center;
+  padding: 100px;
+}
+
+.profile-user-info {
+  align-items: center;
+}
+
+.profile-user-info img {
+  border: 2px solid var(--color-yellow-2);
+  border-radius: 50px;
+  height: 100px;
+  margin-bottom: 24px;
+  width: 100px;
+}
+
+.profile-user-info > p:not( :empty ) {
+  color: var(--color-dark-1);
+  padding: 6px;
+}
+
+.profile-user-info > p:first-of-type {
+  color: var(--color-dark-1);
+  font-weight: 700;
+  padding: 6px;
+}
+
+
+.profile-edit {
+  align-items: center;
+  background-color: var(--color-yellow-2);
+  border-radius: 4px;
+  color: var(--color-dark-1);
+  font-size: 16px;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin-top: 24px;
+  width: 120px;
+}
+
+.profile-edit:hover {
+  border: solid 2px var(--color-dark-1);
+}

@@ -1,55 +1,90 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { HiOutlineHeart, HiHeart, HiPlay } from 'react-icons/hi';
 import Loading from '../pages/Loading';
 import * as favorites from '../services/favoriteSongsAPI';
 import '../css/music-card.css';
 
 class MusicCard extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
+    const { isFavorite } = this.props;
+
     this.state = {
-      favorite: false,
+      favorite: isFavorite,
       loading: false,
     };
   }
 
   handleFavorite = async ({ target }) => {
-    const { trackName, previewUrl, trackId } = this.props;
+    const { name, checked } = target;
+
     this.setState({
+      [name]: checked,
       loading: true,
-      favorite: target.checked,
-    });
-    await favorites.addSong({ trackName, previewUrl, trackId });
-    this.setState({
-      loading: false,
+    }, async () => {
+      const { favorite } = this.state;
+      const { trackName, previewUrl, trackId, loadFavorites } = this.props;
+
+      if (favorite) {
+        await favorites.addSong({ trackName, previewUrl, trackId });
+      } else {
+        await favorites.removeSong({ trackName, previewUrl, trackId });
+      }
+
+      this.setState({ loading: false });
+      loadFavorites();
     });
   };
 
+  handlePlay({ target }) {
+    const currentTarget = target.nodeName === 'path' ? target.parentNode : target;
+
+    const currentActive = document.querySelector('.active');
+    if (currentActive) {
+      currentActive.classList.remove('active');
+      currentActive.previousElementSibling.classList.remove('display-none');
+      currentActive.pause();
+    }
+
+    currentTarget.classList.add('display-none');
+    currentTarget.nextSibling.classList.add('active');
+    currentTarget.nextSibling.play();
+  }
+
   render() {
     const { trackName, previewUrl, trackId } = this.props;
-    const { favorite, loading } = this.state;
+    const { loading, favorite } = this.state;
+    const favIcon = favorite ? <HiHeart /> : <HiOutlineHeart />;
+
     return (
       !loading
         ? (
           <div className="track-line-container row">
             <div className="player-container">
-              <audio data-testid="audio-component" src={ previewUrl } controls>
+              <HiPlay onClick={ (event) => this.handlePlay(event) } />
+              <audio
+                data-testid="audio-component"
+                src={ previewUrl }
+                controls
+              >
                 <track kind="captions" />
-                O seu navegador não suporta o elemento
-                {' '}
-                <code>audio</code>
-                .
               </audio>
             </div>
-            <label htmlFor="favorite">
+            <label htmlFor={ trackId }>
               <input
                 data-testid={ `checkbox-music-${trackId}` }
-                id="favorite"
+                id={ trackId }
                 type="checkbox"
+                name="favorite"
                 checked={ favorite }
-                onClick={ this.handleFavorite }
+                onChange={ this.handleFavorite }
               />
             </label>
+            <span>
+              { favIcon }
+            </span>
             <p>{ trackName }</p>
           </div>
         )
@@ -62,6 +97,12 @@ MusicCard.propTypes = {
   trackName: PropTypes.string,
   previewUrl: PropTypes.string,
   trackId: PropTypes.number,
+  isFavorite: PropTypes.bool,
+  loadFavorites: PropTypes.func,
 }.isRequired;
+
+MusicCard.defaultProps = {
+  loadFavorites: () => {},
+};
 
 export default MusicCard;

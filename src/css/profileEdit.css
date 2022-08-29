@@ -1,0 +1,41 @@
+.profile-edit-container {
+  align-items: center;
+  padding: 40px;
+}
+
+.profile-edit-container img {
+  border: 2px solid var(--color-yellow-2);
+  border-radius: 50px;
+  height: 100px;
+  margin-bottom: 12px;
+  width: 100px;
+}
+
+.profile-edit-form {
+  align-items: center;
+  width: 350px;
+}
+
+.profile-edit-form input {
+  margin: 12px 0;
+  padding: 8px;
+  width: 300px;
+}
+
+.saveBtn {
+  align-items: center;
+  background-color: var(--color-yellow-2);
+  border-radius: 4px;
+  color: var(--color-dark-1);
+  font-size: 16px;
+  font-weight: 700;
+  height: 40px;
+  justify-content: center;
+  margin-top: 24px;
+  width: 120px;
+}
+
+.saveBtn:hover {
+  border: solid 2px var(--color-dark-1);
+}
+

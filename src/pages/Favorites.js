@@ -7,6 +7,7 @@ import * as favorites from '../services/favoriteSongsAPI';
 class Favorites extends Component {
   constructor() {
     super();
+
     this.state = {
       loading: false,
       tracks: [],
@@ -21,10 +22,10 @@ class Favorites extends Component {
     this.setState({
       loading: true,
     });
-    const favorite = await favorites.getFavoriteSongs();
-    // const local = localStorage.getItem('favorite_songs');
+
+    const tracksFavorites = await favorites.getFavoriteSongs();
     this.setState({
-      tracks: favorite,
+      tracks: tracksFavorites,
       loading: false,
     });
   }
@@ -32,25 +33,33 @@ class Favorites extends Component {
   render() {
     const { loading, tracks } = this.state;
     return (
-      !loading
-        ? (
-          <div data-testid="page-favorites">
-            <Header />
-            <div className="album-container">
-              <div className="album-container-tracks col">
-                {tracks
-                  .map((track) => (<MusicCard
-                    key={ track.trackId }
-                    trackId={ track.trackId }
-                    trackName={ track.trackName }
-                    previewUrl={ track.previewUrl }
-                    tracks={ tracks }
-                  />))}
-              </div>
-            </div>
-          </div>
-        )
-        : <Loading />
+      <div data-testid="page-favorites">
+        <Header />
+        {
+          !loading
+            ? (
+              <div className="album-container">
+                <div className="album-container-tracks col">
+                  {tracks
+                    .map((track) => {
+                      const isFavorite = tracks
+                        .some((favorite) => favorite.trackId === track.trackId);
+                      return (
+                        <MusicCard
+                          key={ track.trackId }
+                          trackId={ track.trackId }
+                          trackName={ track.trackName }
+                          previewUrl={ track.previewUrl }
+                          tracks={ tracks }
+                          isFavorite={ isFavorite }
+                          loadFavorites={ this.loadFavorites }
+                        />);
+                    })}
+                </div>
+              </div>)
+            : <Loading />
+        }
+      </div>
     );
   }
 }

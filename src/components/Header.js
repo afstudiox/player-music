@@ -29,7 +29,7 @@ class Header extends Component {
         className="col"
       >
         <div className="header-container-superior row">
-          <div className="logo" />
+          <Link to="/search"><div className="logo" /></Link>
           {
             hasUser
               ? (
@@ -37,7 +37,7 @@ class Header extends Component {
                   <div className="user" />
                   <p data-testid="header-user-name">{ name }</p>
                 </div>)
-              : <Loading />
+              : <div className="hidden"><Loading /></div>
           }
         </div>
         <nav className="nav-container">
