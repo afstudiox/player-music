@@ -19,7 +19,8 @@ class Login extends Component {
   }
 
   // função assincrona para chamar a API e priorizar os redirecionamentos
-  authentication = async () => {
+  authentication = async (event) => {
+    event.preventDefault();
     const { inputName } = this.state;
     this.redirection('loading');
     await createUser({ name: inputName });
@@ -29,9 +30,9 @@ class Login extends Component {
   // funçao que monitora o input atualizado o state
   handleChange = ({ target }) => {
     const { name } = target;
-    this.setState({
-      [name]: target.value,
-    }, this.enableButton());
+      this.setState({
+        [name]: target.value,
+    }, this.enableButton);
   }
 
   // funcao que habilita o botão condicionalmente
@@ -55,7 +56,7 @@ class Login extends Component {
         <div className="login-logo" />
         <div className="login-card col">
           <h2>Seja bem vindo ao seu player favorito</h2>
-          <form className="col">
+          <form className="col" onSubmit={ this.authentication }>
             <label htmlFor="input-nome">
               <input
                 type="text"
@@ -70,7 +71,6 @@ class Login extends Component {
               name="btn-submit"
               data-testid="login-submit-button"
               disabled={ buttonState }
-              onClick={ this.authentication }
             >
               Entrar
             </button>
